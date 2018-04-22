@@ -3,6 +3,8 @@ One file unicode json api &amp; one page web app .
 
 Discover unicode chars by `words`, `hex`, or `unicode character`.
 
+<img width="800" src='https://media.giphy.com/media/YBbHKLNXThZUm9SjtS/giphy.gif'></img>
+
 Copy to clipboard in one icon click. Learn meaning and names of characters. Cultural discoveries everywhere.
 
 Range explorer. Unicode are obtained by iteration of the full table. There is wizardry inside.
@@ -15,8 +17,8 @@ Each character has his own permalink.
 
 ### Setup
 
-The file `inde.php` doesn't need write rights.
+The file `index.php` doesn't need write rights.
 
-Make sure that the files <a href="http://ftp.unicode.org/Public/UNIDATA/Blocks.txt">Blocks.txt</a> and <a href="http://ftp.unicode.org/Public/UNIDATA/UnicodeData.txt">UnicodeData.txt</a> are aside in the same folder.
+Make sure the files <a href="http://ftp.unicode.org/Public/UNIDATA/Blocks.txt">Blocks.txt</a> and <a href="http://ftp.unicode.org/Public/UNIDATA/UnicodeData.txt">UnicodeData.txt</a> are well aside in the same folder.
 
-<img src='https://media.giphy.com/media/4HaMjsELNz5Xkd0ZmL/giphy.gif'></img>
+
