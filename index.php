@@ -55,32 +55,32 @@ if ($_GET["blocks"] != "" && strlen($_GET["blocks"]) > "1"){
 
 <html>
   <style>
-    body{background:white;color:black;font-size:23px;min-width:500px} 
-    input{background:white;color:black;font-size:23px;z-index:3;outline: none;position: fixed;} 
+    body{background:white;color:#3a3030;min-width:500px;font-size:1.4em} 
+    input{background:white;color:black;font-size:0.77em;z-index:3;outline: one;position:fixed} 
     button{position: fixed;top:135px;right:36%;cursor:pointer;z-index:3;font-size:23px}
     #hex{top:135px;width:27.5%;padding-left:5px}
-    a, span{cursor:pointer}
+    a, span{cursor:pointer;vertical-align: middle}
     a:hover{background:black;color:white}
     #search{margin:12% 0% 0 36%;width:23%}
-    article {word-wrap: break-word}
-    #main{top: 190px;margin:0 36% 0 36%;max-width:34%;font-size: xx-large;width: 27%;min-width:200px;}
+    article {word-wrap:break-word;margin:-2% 0 100px 0}
+    #main{top: 190px;margin:0 36% 0 36%;max-width:34%;width: 27%;min-width:200px;}
     .unc{font-size:5rem;vertical-align: middle;display:block;text-align:left;transition: font-size 1s,text-align 1s}
-    .unn{margin:0px 5px 9px -2px;vertical-align: middle;font-size:0.5em; font-weight: bold;text-align:center}
-    .unr{vertical-align: middle;font-size:0.3em;position: relative;left:-9px;top:-88px;z-index:0;float:right;text-align:right}
-    .unp{font-size:0.6em;position: relative;max-width:34%;top:-12px;z-index:-1}
+    .unn{margin:0px 5px 29px -2px;vertical-align: middle;font-size:1em; font-weight: bold;text-align:center}
+    .unr{vertical-align: middle;font-size:0.6em;text-align:right}
+    .unp{font-size:0.8em;position: relative;max-width:34%;top:-12px;z-index:-1}
     #view{border: none;border-color: transparent;font-size:5em;width:100%;height:0;min-height:174px;
            padding:0 20% 53px 20%;position:fixed;top:0;left:0;z-index:1;text-align:center}
-    .unc:hover{font-size:5.3rem;transition: font-size 1s}
+    .unc:hover{font-size:5.3rem;transition:font-size 1s}
     .unn:hover{text-decoration:underline}
     br {content: " ";display: block;margin:1px 0}
     #explorer {position:fixed;bottom:0;left:-10px;height:7%;width:100%}
     #explorerdiv {position:fixed;bottom:0;left:-10px;height:5%;width:100%;background:white;z-index:2}
-    #lkp {z-index: 3;color: black;float: right;font-size: 2.2em;position: fixed;top: 124px;right: 37%;}
-    #lkp:hover {border-radius:8px;color:white;padding:2px}
-    #suggestR{cursor:pointer;top:0;right:0;position:fixed;width:32%;font-size:11px;z-index:2;direction:ltr;color:#232323}
-    #suggestL{cursor:pointer;top:0;left:0;position:fixed;width:32%;font-size:11px;z-index:2;direction:rtl;color:#232323} 
-    ::-moz-selection {background-color:black;color:chartreuse}
-    ::selection {background:black;color:black;color:chartreuse}
+    #lkp {z-index: 3;color: black;float: right;font-size: 2.2em;position:fixed;top: 124px;right: 37%;}
+    #lkp:hover {border-radius:8px;background:#3a3030;color:white;padding:.1x}
+    #suggestR{cursor:pointer;top:0;right:0;position:fixed;width:32%;font-size:11px;z-index:2;direction:ltr;color:#9a7b7b}
+    #suggestL{cursor:pointer;top:0;left:0;position:fixed;width:32%;font-size:11px;z-index:2;direction:rtl;color:#9a7b7b} 
+    ::-moz-selection {background-color:black;color:#fefefe}
+    ::selection {background:black;color:black;color:#fefefe}
   </style>
  <body onload="lookup()">
   <input id=view value=🚍 onchange='lookup()' />
@@ -93,6 +93,7 @@ if ($_GET["blocks"] != "" && strlen($_GET["blocks"]) > "1"){
   <div id=main>
     </div>
     </article>
+    <p><br><br><br><br></p>
 <script>
 function copy(me) {
   view.value=document.getElementById(me).innerText
@@ -126,7 +127,8 @@ function lookup(){
           cfamily = hold[j][3];
           if (cdec == "-1"){
              if (window.location.hash.substring(1, 16) === "%20%F0%9F%93%9F"){explorer.value = hex.value.slice(15);explore();throw "Page mode" }
-             main.innerHTML = "<span style='font-size:10em'>🐯</span>";
+             main.innerHTML = "<span style='font-size:2em'>🐯</span>No unicode match for this word.<p>Double click to lookup any words.<br> Right click for multiples words.</p>"
+             synonyms(hex.value)
              throw "Error!";
           }
           var td = document.createElement("td")
@@ -139,7 +141,7 @@ function lookup(){
           var span4 = document.createElement("span")
           var br = document.createElement("br")
           span2.classList.add("unn")
-          span2.innerText = cname
+          span2.innerHTML = cname+"<br>"
           span3.classList.add("unr")
           span3.innerHTML = "Hex: "+chex+" |  Dec: "+cdec+"<br>"+cfamily; 
           span4.id="_-"+chex
@@ -240,7 +242,7 @@ function ajaxId(me,id){
 </div>
 
 <div id="explorerdiv">
-  <input type="range" id="explorer" min="1" max="500" value="1" step="1" onchange="explore()" />
+  <input type="range" id="explorer" min="1" max="500" value="23" step="1" onchange="explore()" />
 </div>
 
 <script>
@@ -264,6 +266,8 @@ function setup(){
          setTimeout(function(){ ajaxWiki(elem.innerText.split(" ")[5],elem.parentElement.nextSibling.nextSibling.id) }, 20)
          setTimeout(function(){ ajaxWiki(elem.innerText.split(" ")[6],elem.parentElement.nextSibling.nextSibling.id) }, 20)
          setTimeout(function(){ ajaxWiki(elem.innerText.split(" ")[7],elem.parentElement.nextSibling.nextSibling.id) }, 20)
+         
+        //~ }
       }    
     }catch(nope){}
   })
@@ -348,6 +352,40 @@ window.onload= function() {
   if (window.location.hash.substring(1, 16) == "%20%F0%9F%93%9F"){explorer.value = hex.value.slice(15);explore() }
   lookup()  
 }
+
+function synonyms(me){
+  var url = 'https://api.datamuse.com/words?ml=' + hex.value;
+  fetch(url).then(v => v.json()).then((function(v){ 
+    syn = JSON.stringify(v)
+    console.log(syn)
+    syn = JSON.parse(syn)
+    for(var k in syn){
+      main.innerHTML += "<span class='unp'>"+syn[k].word+"</span> "
+      }
+    })
+  ) 
+    ajaxWiki(hex.value,"main")
+    check(hex.value,"main")
+}
+
+
+
+
+
+function nectarize() {
+    var n = main.innerText.split(" "),
+        t = function(n) {
+            "use strict";
+            var t = {};
+            return n instanceof Array && n.forEach(function(n, e) {
+                t[n] ? t[n].push(e) : t[n] = [e]
+            }), t
+        };
+    t(n), main.innerHTML = "<small>" + Object.keys(t(n)).sort(function(n, t) {
+        return n.length - t.length
+    }) + "<br>", window.stop()
+}
+
 
     </script>
   </body>
