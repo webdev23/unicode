@@ -3,8 +3,6 @@
 @ob_start();
 $job = [];
 
-$path = getcwd();
-
 if ($_GET["hex"] != "" && strlen($_GET["hex"]) > "1"){
   @ob_end_clean();
   header('Content-Type: application/json');
@@ -364,29 +362,9 @@ function synonyms(me){
       }
     })
   ) 
-    ajaxWiki(hex.value,"main")
-    check(hex.value,"main")
+  ajaxWiki(hex.value,"main")
+  check(hex.value,"main")
 }
-
-
-
-
-
-function nectarize() {
-    var n = main.innerText.split(" "),
-        t = function(n) {
-            "use strict";
-            var t = {};
-            return n instanceof Array && n.forEach(function(n, e) {
-                t[n] ? t[n].push(e) : t[n] = [e]
-            }), t
-        };
-    t(n), main.innerHTML = "<small>" + Object.keys(t(n)).sort(function(n, t) {
-        return n.length - t.length
-    }) + "<br>", window.stop()
-}
-
-
     </script>
   </body>
 </html>
